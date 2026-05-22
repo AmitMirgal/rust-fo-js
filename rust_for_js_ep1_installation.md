@@ -16,7 +16,8 @@ In JS you'd manage your Node version with **nvm**, and install packages with **n
 | `npm init` — creates a project | `cargo new` — creates a project |
 | `node index.js` — runs your code | `cargo run` — compiles + runs your code |
 
-> 💡 **Mental model:** Think of `rustup` as nvm, and `cargo` as npm + node + npx + jest all rolled into one binary.
+> [!TIP]
+> Think of `rustup` as nvm, and `cargo` as npm + node + npx + jest all rolled into one binary.
 
 ---
 
@@ -36,7 +37,8 @@ Follow the prompts — press `1` to accept defaults.
 
 Download and run the installer from [rustup.rs](https://rustup.rs) — it's a `.exe`, no terminal needed to start.
 
-> ⚠️ **Windows note:** You may also need the MSVC build tools (Visual Studio Build Tools). The installer will tell you if so.
+> [!WARNING]
+> You may also need the MSVC build tools (Visual Studio Build Tools). The installer will tell you if so.
 
 ### Verify the install
 
@@ -59,7 +61,8 @@ cargo --version       # cargo 1.x.x (...)
 | `rustc` | node (the runtime/compiler) | The Rust compiler. You rarely call this directly — cargo does it for you. |
 | `cargo` | npm + npx + jest | Build, run, test, add deps, publish. Your daily driver. |
 
-> ✅ **Good news:** Unlike JS, there is no "which package manager should I use" debate. Everyone uses `cargo`. It ships with Rust and it's official.
+> [!NOTE]
+> Unlike JS, there is no "which package manager should I use" debate. Everyone uses `cargo`. It ships with Rust and it's official.
 
 ---
 
