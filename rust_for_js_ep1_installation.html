@@ -1,0 +1,229 @@
+
+<style>
+  :root {
+    --rust-orange: #ce412b;
+    --rust-dark: #3c1c0d;
+  }
+  .ep-wrap { font-family: var(--font-mono); max-width: 680px; padding: 0; }
+  .ep-header { padding: 2rem 0 1.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 2rem; }
+  .ep-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 12px; }
+  .ep-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #ce412b; }
+  .ep-title { font-family: var(--font-sans); font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+  .ep-sub { font-family: var(--font-sans); font-size: 14px; color: var(--color-text-secondary); margin: 0; }
+  
+  .section { margin-bottom: 2rem; }
+  .section-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0 0 12px; font-family: var(--font-sans); }
+
+  .compare-block { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+  .lang-card { border-radius: var(--border-radius-lg); border: 0.5px solid var(--color-border-tertiary); overflow: hidden; }
+  .lang-card-head { padding: 8px 14px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; font-family: var(--font-sans); border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .lang-card-head .lang-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .js-dot { background: #f7df1e; }
+  .rs-dot { background: #ce412b; }
+  .lang-card-body { padding: 12px 14px; font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); }
+  .lang-card-body code { display: block; background: var(--color-background-secondary); border-radius: 6px; padding: 8px 10px; margin: 8px 0 0; font-size: 13px; color: var(--color-text-primary); font-family: var(--font-mono); white-space: pre; }
+
+  .callout { border-radius: var(--border-radius-md); padding: 12px 14px; font-size: 13px; font-family: var(--font-sans); line-height: 1.6; margin-bottom: 1rem; border: 0.5px solid; }
+  .callout.info { background: var(--color-background-info); border-color: var(--color-border-info); color: var(--color-text-info); }
+  .callout.warn { background: var(--color-background-warning); border-color: var(--color-border-warning); color: var(--color-text-warning); }
+  .callout.success { background: var(--color-background-success); border-color: var(--color-border-success); color: var(--color-text-success); }
+  .callout strong { font-weight: 500; }
+
+  .cmd-block { background: var(--color-background-secondary); border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); padding: 12px 14px; margin: 12px 0; }
+  .cmd-block .prompt { color: var(--color-text-tertiary); font-size: 12px; margin: 0 0 6px; font-family: var(--font-sans); }
+  .cmd-block code { font-size: 13px; color: var(--color-text-primary); font-family: var(--font-mono); display: block; white-space: pre; }
+  .cmd-block .comment { color: var(--color-text-tertiary); font-size: 12px; margin: 6px 0 0; font-family: var(--font-sans); }
+
+  .step-row { display: flex; gap: 12px; margin-bottom: 1rem; align-items: flex-start; }
+  .step-num { width: 24px; height: 24px; min-width: 24px; border-radius: 50%; border: 0.5px solid var(--color-border-secondary); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: var(--color-text-secondary); font-family: var(--font-sans); margin-top: 2px; }
+  .step-content { flex: 1; }
+  .step-title { font-size: 14px; font-weight: 500; font-family: var(--font-sans); color: var(--color-text-primary); margin: 0 0 4px; }
+  .step-desc { font-size: 13px; font-family: var(--font-sans); color: var(--color-text-secondary); line-height: 1.6; margin: 0; }
+
+  .toolchain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
+  .tool-chip { border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); padding: 10px 12px; }
+  .tool-chip .name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); font-family: var(--font-sans); margin: 0 0 2px; }
+  .tool-chip .equiv { font-size: 11px; color: var(--color-text-tertiary); font-family: var(--font-sans); margin: 0 0 4px; }
+  .tool-chip .desc { font-size: 12px; color: var(--color-text-secondary); font-family: var(--font-sans); line-height: 1.5; margin: 0; }
+
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 2rem 0; }
+
+  .nav-row { display: flex; justify-content: flex-end; }
+  .nav-btn { background: transparent; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 8px 14px; font-size: 13px; font-family: var(--font-sans); cursor: pointer; color: var(--color-text-primary); display: flex; align-items: center; gap: 6px; }
+  .nav-btn:hover { background: var(--color-background-secondary); }
+</style>
+
+<div class="ep-wrap">
+  <h2 class="sr-only">Rust for JS developers — Episode 1: Installation</h2>
+
+  <div class="ep-header">
+    <div class="ep-badge"><span class="dot"></span> Rust for JS devs &nbsp;·&nbsp; Episode 01</div>
+    <p class="ep-title">Getting Rust installed</p>
+    <p class="ep-sub">rustup, cargo, and your first "hello, world"</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">The JS parallel</p>
+    <div class="compare-block">
+      <div class="lang-card">
+        <div class="lang-card-head"><span class="lang-dot js-dot"></span> JavaScript / Node</div>
+        <div class="lang-card-body">
+          You manage your Node version with <strong>nvm</strong>, and install packages with <strong>npm</strong>. Two separate tools.
+          <code>nvm install 20
+npm install lodash</code>
+        </div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-card-head"><span class="lang-dot rs-dot"></span> Rust</div>
+        <div class="lang-card-body">
+          Rust collapses this into one tool: <strong>rustup</strong> manages your Rust version, and <strong>cargo</strong> handles everything else — deps, build, run, test.
+          <code>rustup install stable
+cargo add serde</code>
+        </div>
+      </div>
+    </div>
+    <div class="callout info">
+      <strong>Mental model:</strong> Think of rustup as nvm, and cargo as npm + node + npx + jest all rolled into one binary.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-label">Install rustup</p>
+
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <p class="step-title">Run the installer (macOS / Linux)</p>
+        <p class="step-desc">One curl command — same pattern as nvm.</p>
+        <div class="cmd-block">
+          <p class="prompt">terminal</p>
+          <code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code>
+          <p class="comment">Follow the prompts — press 1 to accept defaults</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <p class="step-title">Windows</p>
+        <p class="step-desc">Download and run the installer from rustup.rs — it's a .exe, no terminal needed to start.</p>
+        <div class="callout warn">
+          <strong>Windows note:</strong> You may also need the MSVC build tools (Visual Studio Build Tools). The installer will tell you if so.
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <p class="step-title">Reload your shell, then verify</p>
+        <div class="cmd-block">
+          <p class="prompt">terminal</p>
+          <code>source ~/.cargo/env   # or open a new terminal tab
+rustc --version       # rustc 1.x.x (...)
+cargo --version       # cargo 1.x.x (...)</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-label">The toolchain — what just got installed</p>
+    <div class="toolchain-grid">
+      <div class="tool-chip">
+        <p class="name">rustup</p>
+        <p class="equiv">≈ nvm</p>
+        <p class="desc">Manages Rust versions. Lets you switch between stable / beta / nightly.</p>
+      </div>
+      <div class="tool-chip">
+        <p class="name">rustc</p>
+        <p class="equiv">≈ node (the runtime/compiler)</p>
+        <p class="desc">The Rust compiler. You rarely call this directly — cargo does it for you.</p>
+      </div>
+      <div class="tool-chip">
+        <p class="name">cargo</p>
+        <p class="equiv">≈ npm + npx + jest</p>
+        <p class="desc">Build, run, test, add deps, publish. Your daily driver.</p>
+      </div>
+    </div>
+    <div class="callout success">
+      <strong>Good news:</strong> Unlike JS, there is no "which package manager should I use" debate. Everyone uses cargo. It ships with Rust and it's official.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-label">Your first project</p>
+
+    <div class="compare-block">
+      <div class="lang-card">
+        <div class="lang-card-head"><span class="lang-dot js-dot"></span> Node</div>
+        <div class="lang-card-body">
+          <code>mkdir my-app && cd my-app
+npm init -y
+node index.js</code>
+        </div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-card-head"><span class="lang-dot rs-dot"></span> Rust</div>
+        <div class="lang-card-body">
+          <code>cargo new my-app
+cd my-app
+cargo run</code>
+        </div>
+      </div>
+    </div>
+
+    <p class="step-desc" style="font-family: var(--font-sans); font-size: 13px; color: var(--color-text-secondary); margin: 0 0 12px;">
+      <code>cargo new</code> creates a ready-to-run project. Inside you'll find:
+    </p>
+
+    <div class="cmd-block">
+      <p class="prompt">project structure</p>
+      <code>my-app/
+├── Cargo.toml    ← like package.json (project metadata + deps)
+└── src/
+    └── main.rs   ← your entry point (like index.js)</code>
+    </div>
+
+    <div class="cmd-block" style="margin-top: 12px;">
+      <p class="prompt">src/main.rs — what cargo generated</p>
+      <code>fn main() {
+    println!("Hello, world!");
+}</code>
+      <p class="comment">Run it with: cargo run</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-label">What JS devs find surprising</p>
+
+    <div class="callout warn">
+      <strong>Compilation step:</strong> There's no "just run the file." Rust compiles to a native binary first. <code>cargo run</code> does compile + run in one step, so it feels seamless — but the first build takes a few seconds. Subsequent builds are incremental and fast.
+    </div>
+
+    <div class="callout warn" style="margin-top: 10px;">
+      <strong>~/.cargo, not node_modules:</strong> Dependencies download to a global cache at <code>~/.cargo</code> — not inside your project folder. No more 300mb node_modules per project. Your actual build output lands in <code>target/</code>.
+    </div>
+
+    <div class="callout info" style="margin-top: 10px;">
+      <strong>Cargo.lock:</strong> Like package-lock.json, Cargo.lock pins exact dependency versions. Unlike JS convention, you <em>should</em> commit Cargo.lock for binaries (applications). Libraries omit it — cargo handles the nuance automatically.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="sendPrompt('Rust for JS devs — Episode 2: variables, types, and mutability')">
+      Episode 2: Variables &amp; types ↗
+    </button>
+  </div>
+</div>
