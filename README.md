@@ -34,7 +34,7 @@ If a concept has no JS equivalent (ownership, lifetimes, the borrow checker), th
 | # | Topic | Concepts covered |
 |---|---|---|
 | [01](./rust_for_js_ep1_installation.md) | **Getting Rust installed** | `rustup`, `cargo`, project structure, `Cargo.toml` |
-| 02 | **Variables & types** | `let`, `const`, mutability, type inference *(coming soon)* |
+| [02](./episode-02-variables-types-mutability.md) | **Variables & types** | `let`, `const`, mutability, type inference *(coming soon)* |
 | 03 | **Functions** | `fn`, return values, expressions vs statements *(coming soon)* |
 | 04 | **Ownership** | The concept JS doesn't have — explained from scratch *(coming soon)* |
 | 05 | **Borrowing & references** | `&`, `&mut`, the borrow checker *(coming soon)* |
